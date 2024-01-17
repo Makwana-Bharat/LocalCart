@@ -5,10 +5,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 
 // Screens
-import Home from '../../Screens/Home';
+// import Home from '../../Screens/Home';
 import Cart from '../../Screens/Cart';
 import Profile from '../../Screens/Profile';
 import Notification from '../../Screens/Notification';
+import HomeStack from './HomeStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -69,8 +70,8 @@ const BottomTab = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarButton: (props) =>(
               <CustomTabBarButton {...props} label="Home" Icon='ios-home' />
