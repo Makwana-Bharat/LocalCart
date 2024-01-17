@@ -13,7 +13,7 @@ const ItemList = () => {
         <TouchableOpacity
             style={[
                 styles.categoryItem,
-                item === selectedCategory && styles.selectedCategory
+                (item === 'All' && selectedCategory === null) || item === selectedCategory && styles.selectedCategory
             ]}
             onPress={() => handleCategoryPress(item)}
         >
@@ -27,10 +27,12 @@ const ItemList = () => {
             : data.flatMap(category => category.items.filter(item => item.category === selectedCategory));
     };
 
+    const handleItemPress = (item) => {
+        
+    }
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.cardContainer} onPress={() => handleItemPress(item)}>
             <View style={{ flex: 1, height: '80%', backgroundColor: '#EFEFEF' ,width:'100%'}}>
-
             <Image source={{ uri: item.image }} style={styles.itemImage} />
             </View>
             <View style={styles.itemDetails}>
@@ -94,17 +96,14 @@ const styles = StyleSheet.create({
         height:300,
         borderRadius: 12,
         backgroundColor: '#FFFFFF',
+        overflow: 'hidden',
         elevation: 3,
-        borderWidth: 1,
-        borderColor: '#EFEFEF',
     },
     itemImage: {
         flex: 1,
-        aspectRatio:1/1,
-        borderRadius: 12,
-        overflow: 'hidden',
     },
     itemDetails: {
+        width:'100%',
         padding: 12,
     },
     itemName: {
@@ -114,7 +113,8 @@ const styles = StyleSheet.create({
     },
     itemPrice: {
         fontSize: 14,
-        color: '#007BFF',
+        fontWeight:'bold',
+        color: '#127327',
     },
 });
 
