@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import data from '../../DemoData';
-
+import MasonryList from '@react-native-seoul/masonry-list';
 const ItemList = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -44,19 +44,22 @@ const ItemList = () => {
 
     return (
         <View style={styles.container}>
-            <FlatList
-                data={['All', ...new Set(data.map(item => item.category))]}
-                horizontal
-                keyExtractor={(item) => item}
-                showsHorizontalScrollIndicator={false}
-                renderItem={renderCategoryItem}
-                contentContainerStyle={styles.categoryListContainer}
-            />
-            <FlatList
+            <View style={{height:40}}>
+                <FlatList
+                    data={['All', ...new Set(data.map(item => item.category))]}
+                    horizontal
+                    keyExtractor={(item) => item}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={renderCategoryItem}
+                />
+            </View>
+            <MasonryList
                 data={getFilteredData()}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={2}
                 renderItem={renderItem}
+                
+            // Other MasonryList props can be added here
             />
         </View>
     );
@@ -66,9 +69,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-    },
-    categoryListContainer: {
-        paddingVertical: 8,
+        paddingBottom: 0, // Add this line to remove bottom padding
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems:'center'
     },
     categoryItem: {
         display: 'flex',
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginRight: 8,
         borderRadius: 12,
-        height: 40,
+        maxheight: 10,
         minWidth: 80,
         backgroundColor: '#EFEFEF',
     },
@@ -101,8 +105,11 @@ const styles = StyleSheet.create({
     },
     itemImage: {
         flex: 1,
+        
     },
+
     itemDetails: {
+        backgroundColor:'#ffffff',
         width:'100%',
         padding: 12,
     },
